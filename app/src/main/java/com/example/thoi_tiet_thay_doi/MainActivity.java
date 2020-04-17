@@ -148,22 +148,24 @@ public class MainActivity extends AppCompatActivity {
         String sql = "INSERT INTO tbthoitiet (name, kieu, nhiet) VALUES(" + "'" + name + "'," + "'" + kieuthoieit + "'," + "'" + nhiet + "')";
         db.execSQL(sql);
     }
-    private  void timraThapNhat()
+    private void timraThapNhat()
     {
 
-        List<thoitiet> list = new ArrayList<>();
-        int min = list.get(1).getTemp();
-        String quocgia = "";
-        for(int i = 0 ; i< list.size() ; i++)
+        int min = temp.get(0).getTemp();
+       String quocgia = "";
+        for(int i = 0 ; i< temp.size() ; i++)
         {
-            if(min > list.get(i).getTemp())
+            if(min > temp.get(i).getTemp())
             {
-                min = list.get(i).getTemp();
-                quocgia = list.get(i).getNuoc();
+                min = temp.get(i).getTemp();
+               quocgia = temp.get(i).getNuoc();
             }
         }
-        Toast.makeText(this, ""+min, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,""+ min, Toast.LENGTH_SHORT).show();
 
-
+        Intent i = new Intent(this , InfoActivity.class);
+        i.putExtra(InfoActivity.KEY_NUOC , quocgia);
+        i.putExtra(InfoActivity.KEY_TEMP , min);
+        startActivity(i);
     }
 }
