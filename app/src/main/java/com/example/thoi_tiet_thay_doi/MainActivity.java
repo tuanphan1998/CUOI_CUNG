@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 TextView thanhpho = convertView.findViewById(R.id.txt1);
                 TextView nhietdo = convertView.findViewById(R.id.txt2);
                 TextView trangthai = convertView.findViewById(R.id.txt3);
-
                 ImageView hinhanh = convertView.findViewById(R.id.iamge1);
                 thoitiet t = temp.get(position);
                 thanhpho.setText(t.getNuoc());
@@ -68,24 +66,24 @@ public class MainActivity extends AppCompatActivity {
                 // tim gia tri nho nhat
 
 
+
                 int idtemp = R.drawable.ic_may;
                 if(t.getTemp() < 20)
                 {
-                    kieuthoieit = "mua to"
+                    kieuthoieit = "mua to";
                     idtemp = R.drawable.ic_mua;
-                    trangthai.setText("mưa to");
-
+                    trangthai.setText("Mưa to");
 
                 }
-                else if(t.getTemp() < 30)
+                else if(t.getTemp() >= 20 && t.getTemp() < 30)
                 {
-                    kieuthoieit = "may mu"
+                    kieuthoieit = "may mu";
                     idtemp = R.drawable.ic_may;
                     trangthai.setText("mây mù");
                 }
-                else
+                else if(t.getTemp() >= 30)
                 {
-                    kieuthoieit = "nang to"
+                    kieuthoieit = "nang to";
                     idtemp = R.drawable.ic_nang;
                     trangthai.setText("nang to ");
                 }
@@ -128,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
               return;
           }
           t.setNuoc(nuoc);
-          t.setNuoc(nhieudo);
+          t.setTemp(Integer.parseInt(nhieudo));
           temp.add(t);
           SaveThoiTiet();
           adt.notifyDataSetChanged();
@@ -164,10 +162,8 @@ public class MainActivity extends AppCompatActivity {
                 quocgia = list.get(i).getNuoc();
             }
         }
+        Toast.makeText(this, ""+min, Toast.LENGTH_SHORT).show();
 
-        Intent i = new Intent(this , InfoActivity.class);
-        i.putExtra(InfoActivity.KEY_NUOC , quocgia);
-        i.putExtra(InfoActivity.KEY_TEMP , min);
-        startActivity(i);
+
     }
 }
